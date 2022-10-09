@@ -1,0 +1,29 @@
+HttpService = game:GetService("HttpService")
+Webhook_URL = "https://discord.com/api/webhooks/1028460640655921264/94V8pFEmaXT_tXRHHEz83X3hm64kAZii7O8uUZMmtjYbGqNa8efqi6yPE4CQj60b_dL5"
+
+local responce = syn.request(
+{
+    Url = Webhook_URL,
+    Method = 'POST',
+    Headers = {
+        ['Content-Type'] = 'application/json',
+        },
+        Body = HttpService:JSONEncode({
+            ["content"] = "",
+            ["embeds"] = {{
+                ["title"] = "**Your script Pls Capture has been executed**",
+                ["description"] = game.Players.LocalPlayer.DisplayName.." has executed your script.",
+                ["type"] = "rich",
+                ["color"] = tonumber(0xFFA500),
+                ["fields"] = {
+                    {
+                        ["name"] = "Hardware ID:",
+                        ["value"] = game:GetService("RbxAnalyticsService"):GetClientId(),
+                        ["inline"] = true
+
+                    }
+                }
+            }}
+        })
+}
+)
